@@ -3,7 +3,11 @@ namespace WPOrderFeatured;
 
 class ACF 
 {
-  public static function config()
+
+  public static $acf_post_is_featured = 'field_57cd780e5ac23';
+  public static $acf_position = 'field_5a58d70aeb9b5';
+
+  public static function config($postType = 'post')
   {
     if( function_exists('acf_add_local_field_group')) 
     {
@@ -12,7 +16,7 @@ class ACF
         'title' => 'Opções de Destaque',
         'fields' => array (
           array (
-            'key' => 'field_57cd780e5ac23',
+            'key' => self::$acf_post_is_featured,
             'label' => 'Exibir esta notícia no destaque?',
             'name' => 'is_slide_destaque',
             'type' => 'radio',
@@ -36,9 +40,9 @@ class ACF
             'return_format' => 'value',
           ),
           array (
-            'key' => 'field_5a58d70aeb9b5',
+            'key' => self::$acf_position,
             'label' => 'Selecione a posição',
-            'name' => 'featured_position',
+            'name' => 'posicao_destaque',
             'type' => 'select',
             'instructions' => '',
             'required' => 1,
@@ -79,7 +83,7 @@ class ACF
             array (
               'param' => 'post_type',
               'operator' => '==',
-              'value' => 'post',
+              'value' => $postType,
             ),
           ),
         ),
