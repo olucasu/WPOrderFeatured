@@ -1,0 +1,21 @@
+{
+  "name": "olucasu/wp-order-featured",
+  "type": "library",
+  "description": "Cria ordenação de notícias no Wordpress",
+  "license": "MIT",
+  "require": {
+    "php" : ">=5.5.0"
+  },
+  "authors": [
+      {
+          "name": "Lucas Guilherme",
+          "email": "lglucasu@gmail.com",
+          "role": "Developer"
+      }
+  ],
+  "autoload": {
+    "psr-4": {
+        "WPOrderFeatured\\": "src/"
+    }
+  }
+}
