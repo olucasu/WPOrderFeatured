@@ -39,7 +39,7 @@ class WPOrderFeatured
         'post_type'   => $this->getPostType(),
         'meta_query'  => [
           array(
-            'key' => 'featured_position',
+            'key' => 'posicao_destaque',
             'value' => $position,
             'compare' => '=='
           ),
@@ -84,17 +84,32 @@ class WPOrderFeatured
     add_action( 'save_post', array( $this , 'update_featured' ) );
   }
 
+  private function setPostType($postType) 
+  {
+    $this->post_type = $postType;
+  }
+
   private function getPostType()
   {
     return $this->post_type;
   }
 
-  public static function bootstrap($acf_post_is_featured = 'field_57cd780e5ac23', $acf_position = 'field_5a58d70aeb9b5' )
+  /**
+   * 
+   * # Bootstrap
+   * 
+   * @param postType
+   * - Post type configurado para exibir o ACF
+   * 
+   * @param acf
+   */
+  public static function bootstrap($postType = 'post')
   {
-    ACF::config();
+    ACF::config($postType);
     $wpOrderFeatured = new WPOrderFeatured();
-    $wpOrderFeatured->setAcfPostIsFeatured($acf_post_is_featured);
-    $wpOrderFeatured->setAcfPosition($acf_position);
+    $wpOrderFeatured->setPostType($postType);
+    $wpOrderFeatured->setAcfPostIsFeatured(ACF::$acf_post_is_featured);
+    $wpOrderFeatured->setAcfPosition(ACF::$acf_position);
     $wpOrderFeatured->addAction();
   }
 }
